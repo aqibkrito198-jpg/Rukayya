@@ -1,0 +1,388 @@
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>For My Rukayya ❤️</title>  <style>  
+:root {  
+  --pink: #ff4d6d;  
+  --light: #ffb3c1;  
+  --gold: #ffd700;  
+}  
+  
+* { box-sizing: border-box; }  
+  
+body {  
+  margin: 0;  
+  background: black;  
+  font-family: 'Segoe UI', sans-serif;  
+  color: white;  
+  text-align: center;  
+  overflow-x: hidden;  
+}  
+  
+/* Screen Layout */  
+.screen {  
+  position: fixed;  
+  inset: 0;  
+  display: flex;  
+  flex-direction: column;  
+  justify-content: center;  
+  align-items: center;  
+  padding: 20px;  
+  background: black;  
+  transition: 1s;  
+  z-index: 10;  
+}  
+.hidden { display: none; }  
+  
+/* Buttons & Inputs */  
+button {  
+  padding: 12px 25px;  
+  border: none;  
+  border-radius: 30px;  
+  background: var(--pink);  
+  color: white;  
+  font-weight: bold;  
+  cursor: pointer;  
+  margin: 10px;  
+  word-break: break-word;  
+}  
+input {  
+  padding: 12px;  
+  border-radius: 10px;  
+  border: 2px solid var(--pink);  
+  background: transparent;  
+  color: white;  
+  text-align: center;  
+  max-width: 100%;  
+}  
+  
+/* Text Glow */  
+.glow { text-shadow: 0 0 15px var(--pink); }  
+  
+/* Floating Hearts */  
+.heart {  
+  position: absolute;  
+  bottom: -20px;  
+  font-size: 20px;  
+  animation: float linear infinite;  
+  opacity: 0.6;  
+}  
+@keyframes float {  
+  0% { transform: translateY(0) scale(1); }  
+  100% { transform: translateY(-110vh) scale(1.5); }  
+}  
+  
+/* Main Content */  
+.main {  
+  display: none;  
+  background: linear-gradient(to bottom, #1a000e, #000);  
+  padding-bottom: 80px;  
+}  
+section {  
+  padding: 60px 20px;  
+  max-width: 600px;  
+  width: 100%;  
+  margin: auto;  
+  border-bottom: 1px solid rgba(255,77,109,0.2);  
+  word-wrap: break-word;  
+}  
+  
+/* Tap Heart */  
+#tapHeart {  
+  font-size: 80px;  
+  cursor: pointer;  
+  animation: pulse 1s infinite;  
+}  
+@keyframes pulse {  
+  0%, 100% { transform: scale(1); }  
+  50% { transform: scale(1.2); }  
+}  
+  
+/* Reason Box */  
+.reason-box {  
+  background: rgba(255,77,109,0.1);  
+  border: 1px solid var(--pink);  
+  padding: 20px;  
+  border-radius: 15px;  
+  min-height: 100px;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  font-style: italic;  
+  word-wrap: break-word;  
+}  
+  
+/* Final Vow */  
+.final {  
+  font-size: 1.1rem;  
+  color: var(--light);  
+  line-height: 1.8;  
+  max-width: 500px;  
+  width: 100%;  
+  margin: auto;  
+  padding: 30px;  
+}  
+  
+/* Memories */  
+.memory-pic {  
+  width: 150px;  
+  height: 150px;  
+  max-width: 100%;  
+  object-fit: cover;  
+  border-radius: 20px;  
+  border: 2px solid var(--pink);  
+  transition: transform 0.3s, box-shadow 0.3s;  
+  cursor: pointer;  
+}  
+.memory-pic:hover {  
+  transform: scale(1.1);  
+  box-shadow: 0 0 15px var(--pink);  
+}  
+  
+/* Responsive */  
+@media screen and (max-width:480px){  
+  #tapHeart{font-size:60px;}  
+  .reason-box, .final, section{padding:30px 15px;}  
+  .memory-pic{width:100px; height:100px;}  
+}  
+</style>  </head>  
+<body>  <!-- Floating Hearts -->  <script>  
+setInterval(() => {  
+  const heart = document.createElement("div");  
+  heart.className = "heart";  
+  heart.innerText = "❤️";  
+  heart.style.left = Math.random() * 100 + "%";  
+  heart.style.animationDuration = (4 + Math.random() * 4) + "s";  
+  document.body.appendChild(heart);  
+  setTimeout(() => heart.remove(), 6000);  
+}, 600);  
+</script>  <!-- Screen 1: Password -->  <div id="screen1" class="screen">  
+  <h1 class="glow">ACCESSING PRIVATE LOVE SERVER 🔒</h1>  
+  <p class="glow" style="color:var(--light)">Enter our special date (DDMMYYYY)</p>  
+  <input type="password" id="pass">  
+  <button onclick="checkPass()">UNLOCK ❤️</button>  
+  <p id="error" style="color:red;"></p>  
+</div>  <!-- Screen 2: Tap Heart Game -->  <div id="screen2" class="screen hidden">  
+  <h2 class="glow">Tap My Heart Until It Explodes With Love 💓</h2>  
+  <div id="tapHeart">❤️</div>  
+  <p id="tapCount">Taps: 0 / 5</p>  
+</div>  <!-- Main Content -->  <div id="main" class="main">  <section>  
+<h2 class="glow">Infinite Love Compliments 💌</h2>  
+<div class="reason-box" id="compliment">Click below to reveal magic...</div>  
+<button onclick="newCompliment()">Reveal Compliment ✨</button>  
+</section>  <section>  
+<h2 class="glow">30 Reasons Why I Love You ❤️</h2>  
+<div class="reason-box" id="reasonBox">Click to begin our journey...</div>  
+<button onclick="nextReason()">Next Reason 💖</button>  
+</section>  <section>  
+<h2 class="glow">Future Together 🔮</h2>  
+<button onclick="showFuture()">Reveal Our Destiny</button>  
+<div id="future" style="display:none; margin-top:15px;">  
+<p>💍 Our wedding will be magical.</p>  
+<p>🏠 Our home will be full of laughter.</p>  
+<p>👶 Our kids will know real love.</p>  
+</div>  
+</section>  <section>  
+<h2 class="glow">Our Memories 📸</h2>  
+<div id="memories" style="display:flex; flex-wrap:wrap; justify-content:center; gap:15px;">  
+  <img src="rukkubabe08.jpg" alt="Us 2" class="memory-pic">  
+  <img src="rukkubabe07.jpg" alt="Us 3" class="memory-pic">  
+  <img src="rukkubabe05.jpg" alt="Us 4" class="memory-pic">  
+  <img src="rukkubabe04.jpg" alt="Us 5" class="memory-pic">  
+  <img src="rukkubabe02.jpg" alt="Us 6" class="memory-pic">  
+  <img src="rukkubabe03.jpg" alt="Us 7" class="memory-pic">  
+</div>  
+</section>  <section style="border:none;">  
+<button onclick="finalVow()">THE FINAL VOW ❤️</button>  
+</section>  </div>  <!-- Final Screen with Back Button -->  <div id="finalScreen" class="screen hidden">  
+  <div class="final" id="finalText"></div>  
+  <button onclick="backToMain()">⬅ Back</button>  
+</div>  <script>  
+const correctPassword = "03012024";  
+  
+/* Password Check */  
+function checkPass() {  
+  const val = document.getElementById("pass").value;  
+  const error = document.getElementById("error");  
+  if (val === correctPassword) {  
+    error.innerText = "Decrypting Love...";  
+    setTimeout(() => {  
+      screen1.classList.add("hidden");  
+      screen2.classList.remove("hidden");  
+    }, 1500);  
+  } else {  
+    error.innerText = "Wrong date... but I still love you 😅";  
+  }  
+}  
+  
+/* Tap Heart Game */  
+let taps = 0;  
+const tapTarget = 5;  
+document.getElementById("tapHeart").onclick = function () {  
+  taps++;  
+  document.getElementById("tapCount").innerText = `Taps: ${taps} / ${tapTarget}`;  
+  if (taps >= tapTarget) {  
+    screen2.classList.add("hidden");  
+    main.style.display = "block";  
+  }  
+};  
+  
+/* Infinite Compliments */  
+const compliments = [  
+  "You are the most beautiful soul I’ve ever known.",  
+  "Your smile could heal my worst days.",  
+  "You are my peace in chaos.",  
+  "You make my world brighter.",  
+  "You are my dream come true.",  
+  "You are my forever person.",  
+  "You are the reason my heart beats faster.",  
+  "You are my safe place.",  
+  "You are my answered prayer."  
+];  
+function newCompliment() {  
+  const random = compliments[Math.floor(Math.random() * compliments.length)];  
+  document.getElementById("compliment").innerText = random;  
+}  
+  
+/* 30 Reasons */  
+const reasons = [  
+  "Your smile melts me.","You understand me.","Your kindness.","Your laughter.",  
+  "Your loyalty.","Your strength.","Your intelligence.","Your beauty.","Your heart.",  
+  "Your voice.","Your care.","Your hugs.","Your support.","Your patience.","Your honesty.",  
+  "Your faith in us.","Your softness.","Your love.","Your dreams.","Your respect.",  
+  "Your passion.","Your style.","Your effort.","Your forgiveness.","Your comfort.",  
+  "Your excitement.","Your dedication.","Your warmth.","Your presence.","Because you are YOU."  
+];  
+  
+let index = 0;  
+function nextReason() {  
+  document.getElementById("reasonBox").innerText = index < reasons.length ? reasons[index++] : "And I could keep going forever... ❤️";  
+}  
+  
+/* Future Together */  
+function showFuture() {  
+  document.getElementById("future").style.display = "block";  
+}  
+  
+/* Final Vow */  
+function finalVow() {  
+  main.style.display = "none";  
+  finalScreen.classList.remove("hidden");  
+  const text = `Rukayya,\n\nMeeting you was destiny.\nLoving you was my choice. And choosing you forever will be my promise.\nNo matter what life brings, I will stand beside you.\nYou are my today, my tomorrow, and my forever.\n\nI Love You. ❤️`;  
+    
+  let i = 0;  
+  function type() {  
+    if (i < text.length) {  
+      finalText.innerHTML += text.charAt(i) === "\n" ? "<br>" : text.charAt(i);  
+      i++;  
+      setTimeout(type, 40);  
+    }  
+  }  
+  type();  
+}  
+  
+/* Back Button from Final Vow */  
+function backToMain() {  
+  finalScreen.classList.add("hidden");  
+  main.style.display = "block";  
+  finalText.innerHTML = ""; // reset typing  
+}  
+</script>  </body>  
+</html>  
+  <!-- ❤️ LOVE MUSIC -->  
+<audio id="loveMusic" loop>  
+  <source src="love.mp3" type="audio/mpeg">  
+</audio>  <button onclick="startMusic()" style="position:fixed;bottom:15px;right:15px;z-index:99;">  
+🎵 Play Our Song  
+</button>  <script>  
+function startMusic(){  
+  document.getElementById("loveMusic").play();  
+}  
+</script>  <!-- ⏳ LOVE TIMER -->  <section>  
+<h2 class="glow">Since I Met You ⏳</h2>  
+<p id="loveTimer" class="reason-box"></p>  
+</section>  <script>  
+const meetDate = new Date("Jan 3, 2024 00:00:00").getTime();  
+setInterval(() => {  
+  const now = new Date().getTime();  
+  const diff = now - meetDate;  
+  const days = Math.floor(diff / (1000*60*60*24));  
+  const hours = Math.floor((diff % (1000*60*60*24))/(1000*60*60));  
+  document.getElementById("loveTimer").innerText =  
+    days + " days " + hours + " hours of loving you ❤️";  
+},1000);  
+</script>  <!-- 💌 SECRET LETTER -->  <section>  
+<h2 class="glow">Secret Letter 💌</h2>  
+<button onclick="openLetter()">Open My Heart</button>  
+<p id="letter" class="reason-box" style="display:none;">  
+You are the best thing that ever happened to me.  
+If I had one wish, it would be to live every life with you.  
+</p>  
+</section>  <script>  
+function openLetter(){  
+  document.getElementById("letter").style.display = "block";  
+}  
+</script>  <!-- 🕌 DUA MESSAGE -->  <section>  
+<h2 class="glow">A Dua For You 🤲</h2>  
+<p class="reason-box">  
+May Allah protect you, bless you, and keep you smiling always.  
+Ameen ❤️  
+</p>  
+</section>
+
+<button onclick="loveRain()">Click If You Love Me ✨</button>
+
+<!-- ❤️ LOVE POPUP -->
+<div id="lovePopup" style="
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:linear-gradient(45deg,#1a0000,#3b0000);
+padding:25px;
+border-radius:20px;
+box-shadow:0 0 30px rgba(255,0,76,0.9);
+color:white;
+text-align:center;
+z-index:10000;
+width:80%;
+max-width:300px;
+">
+  <h2 style="color:#ff4d6d;">❤️ My Love ❤️</h2>
+  <p>You are my everything, my peace, my home 💖</p>
+  <button onclick="closePopup()">Close 💕</button>
+</div>
+
+<script>
+function loveRain(){
+
+  // 🌹 SHOW LOVE POPUP
+  document.getElementById("lovePopup").style.display="block";
+
+  // 🌹 ROSE RAIN
+  for(let i=0;i<40;i++){
+    const rose = document.createElement("div");
+    rose.innerText="🌹";
+    rose.style.position="fixed";
+    rose.style.top="-50px";
+    rose.style.left=Math.random()*100+"%";
+    rose.style.fontSize="26px";
+    rose.style.zIndex="9999";
+    rose.style.transition="top 6s linear";
+
+    document.body.appendChild(rose);
+
+    setTimeout(()=>{
+      rose.style.top="110vh";
+    },10);
+
+    setTimeout(()=>rose.remove(),6000);
+  }
+}
+
+function closePopup(){
+  document.getElementById("lovePopup").style.display="none";
+}
+</script>
